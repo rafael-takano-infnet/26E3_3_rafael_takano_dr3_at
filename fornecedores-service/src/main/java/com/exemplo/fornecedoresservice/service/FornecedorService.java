@@ -1,5 +1,7 @@
 package com.exemplo.fornecedoresservice.service;
 
+import com.exemplo.fornecedoresservice.client.ProdutoClient;
+import com.exemplo.fornecedoresservice.dto.ProdutoDTO;
 import com.exemplo.fornecedoresservice.model.Fornecedor;
 import com.exemplo.fornecedoresservice.repository.FornecedorRepository;
 import org.springframework.stereotype.Service;
@@ -15,9 +17,11 @@ import java.util.Optional;
 public class FornecedorService {
 
     private final FornecedorRepository fornecedorRepository;
+    private final ProdutoClient produtoClient;
 
-    public FornecedorService(FornecedorRepository fornecedorRepository) {
+    public FornecedorService(FornecedorRepository fornecedorRepository, ProdutoClient produtoClient) {
         this.fornecedorRepository = fornecedorRepository;
+        this.produtoClient = produtoClient;
     }
 
     public List<Fornecedor> listarTodos() {
@@ -30,5 +34,9 @@ public class FornecedorService {
 
     public Fornecedor salvar(Fornecedor fornecedor) {
         return fornecedorRepository.save(fornecedor);
+    }
+
+    public List<ProdutoDTO> listarProdutos() {
+        return produtoClient.listarTodos();
     }
 }

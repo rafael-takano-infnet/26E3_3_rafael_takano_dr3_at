@@ -1,5 +1,6 @@
 package com.exemplo.fornecedoresservice.controller;
 
+import com.exemplo.fornecedoresservice.dto.ProdutoDTO;
 import com.exemplo.fornecedoresservice.model.Fornecedor;
 import com.exemplo.fornecedoresservice.service.FornecedorService;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,11 @@ public class FornecedorController {
         return fornecedorService.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/produtos")
+    public List<ProdutoDTO> listarProdutos() {
+        return fornecedorService.listarProdutos();
     }
 
     @PostMapping
